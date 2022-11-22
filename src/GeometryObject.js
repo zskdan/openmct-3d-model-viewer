@@ -1,7 +1,9 @@
 define([
-    'three'
+    'three',
+    'three-gltf-loader'
 ], function (
-    THREE
+    THREE,
+    GLTFLoader
 ) {
     function GeometryObject(html) {
         this.scene = new THREE.Scene();
@@ -26,21 +28,19 @@ define([
         this.renderer.setSize(500, 500);
         this.renderer.setClearColor(0x000000, 1);
         html.appendChild(this.renderer.domElement);
-
-
     }
-
+/*
     GeometryObject.prototype.object = function () {
-        this.geometry = new THREE.BoxGeometry(1, 1, 1);
-        this.material = new THREE.MeshPhongMaterial({
-            color: 0x156289,
-            emissive: 0x072534,
-            side: THREE.DoubleSide,
-            flatShading: true});
-        this.cube = new THREE.Mesh(this.geometry, this.material);
-
-        this.scene.add(this.cube);
-        this.renderer.render(this.scene, this.camera);
+    	const loader = new THREE.ObjectLoader();
+	this.cube = loader.parse(rocketJson);
+	this.scene.add(this.cube);
+	this.renderer.render(this.scene, this.camera);
+    }
+    */
+    GeometryObject.prototype.object = function () {
+        const loader = new GLTFLoader();
+    	loader.load('rocket.gltf', (gltf) => {this.scene.add(gltf.scene);} );
+	this.renderer.render(this.scene, this.camera);
     }
 
     GeometryObject.prototype.updateX = function (x) {
