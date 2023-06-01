@@ -38,6 +38,10 @@ define([], function () {
         ['roll', 'pitch', 'yaw'].forEach(function (property) {
             var idParts = domainObject[property].split(":");
             var identifier = {namespace:domainObject['namespace'].split(":")[0], key: idParts[0]};
+            console.log("identifier"+identifier);
+            console.log("property:"+property);
+            console.log("idParts:"+idParts);
+            console.log("namespace:"+domainObject['namespace'].split(":"));
 
             requests.push(this.openmct.objects.get(identifier).then(function (obj) {
                 this.metadata[property] = this.openmct.telemetry.getMetadata(obj);
