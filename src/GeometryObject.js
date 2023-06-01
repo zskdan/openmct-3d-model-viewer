@@ -6,6 +6,8 @@ define([
     GLTFLoader
 ) {
     function GeometryObject(html) {
+        this.RenderDone = 0;
+        this.RenderId = 0;
         this.loader = new GLTFLoader.GLTFLoader();
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, 500 / 500, 0.1, 1000);
@@ -38,19 +40,38 @@ define([
         } );
     }
 
+   GeometryObject.prototype.TryRender = function () {
+        this.RenderDone += 1;
+        if (this.RenderDone == 3) {
+            this.RenderDone = 0;
+            console.log("Render id:"+this.RenderId);
+            this.renderer.render(this.scene, this.camera);
+            this.RenderId += 1;
+        }
+    }
+
     GeometryObject.prototype.updateX = function (x) {
-        this.scene.rotation.x = x;
-        this.renderer.render(this.scene, this.camera);
+        if (this.scene.rotation.x != x) {
+            this.scene.rotation.x = x;
+            console.log("updateX:"+x);
+            this.TryRender();
+        }
     }
 
     GeometryObject.prototype.updateY = function (y) {
-        this.scene.rotation.y = y;
-        this.renderer.render(this.scene, this.camera);
+        if (this.scene.rotation.y != y) {
+            this.scene.rotation.y = y;
+            console.log("updateY:"+y);
+            this.TryRender();
+        }
     }
 
     GeometryObject.prototype.updateZ = function (z) {
-        this.scene.rotation.z = z;
-        this.renderer.render(this.scene, this.camera);
+        if (this.scene.rotation.z != z) {
+            this.scene.rotation.z = z;
+            console.log("updateZ:"+z);
+            this.TryRender();
+        }
     }
 
     return GeometryObject;
