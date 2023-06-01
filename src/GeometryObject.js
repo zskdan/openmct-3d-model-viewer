@@ -1,11 +1,12 @@
 define([
     'three',
-    'three-gltf-loader'
+    './GLTFLoader'
 ], function (
     THREE,
     GLTFLoader
 ) {
     function GeometryObject(html) {
+        this.loader = new GLTFLoader.GLTFLoader();
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, 500 / 500, 0.1, 1000);
         this.camera.position.z = 2;
@@ -29,38 +30,26 @@ define([
         this.renderer.setClearColor(0x000000, 1);
         html.appendChild(this.renderer.domElement);
     }
-/*
+
     GeometryObject.prototype.object = function () {
-    	const loader = new THREE.ObjectLoader();
-	this.cube = loader.parse(rocketJson);
-	this.scene.add(this.cube);
-	this.renderer.render(this.scene, this.camera);
-    }
-    */
-    GeometryObject.prototype.object = function () {
-        const loader = new GLTFLoader();
-    	loader.load('rocket.gltf', (gltf) => {this.scene.add(gltf.scene);} );
-	this.renderer.render(this.scene, this.camera);
+        this.loader.load('rocket.gltf', (gltf) => {
+            this.scene.add(gltf.scene);
+            this.renderer.render(this.scene, this.camera);
+        } );
     }
 
     GeometryObject.prototype.updateX = function (x) {
-
-        this.cube.rotation.x = x;
-
+        this.scene.rotation.x = x;
         this.renderer.render(this.scene, this.camera);
     }
 
     GeometryObject.prototype.updateY = function (y) {
-
-        this.cube.rotation.y = y;
-
+        this.scene.rotation.y = y;
         this.renderer.render(this.scene, this.camera);
     }
 
     GeometryObject.prototype.updateZ = function (z) {
-
-        this.cube.rotation.z = z;
-
+        this.scene.rotation.z = z;
         this.renderer.render(this.scene, this.camera);
     }
 
