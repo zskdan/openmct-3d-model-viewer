@@ -44,7 +44,7 @@ define([
         this.RenderDone += 1;
         if (this.RenderDone == 3) {
             this.RenderDone = 0;
-            console.log("Render id:"+this.RenderId);
+            //console.log("Render id:"+this.RenderId);
             this.renderer.render(this.scene, this.camera);
             this.RenderId += 1;
         }
@@ -53,7 +53,7 @@ define([
     GeometryObject.prototype.updateX = function (x) {
         if (this.scene.rotation.x != x) {
             this.scene.rotation.x = x;
-            console.log("updateX:"+x);
+            //console.log("updateX:"+x);
             this.TryRender();
         }
     }
@@ -61,7 +61,7 @@ define([
     GeometryObject.prototype.updateY = function (y) {
         if (this.scene.rotation.y != y) {
             this.scene.rotation.y = y;
-            console.log("updateY:"+y);
+            //console.log("updateY:"+y);
             this.TryRender();
         }
     }
@@ -69,7 +69,7 @@ define([
     GeometryObject.prototype.updateZ = function (z) {
         if (this.scene.rotation.z != z) {
             this.scene.rotation.z = z;
-            console.log("updateZ:"+z);
+            //console.log("updateZ:"+z);
             this.TryRender();
         }
     }
