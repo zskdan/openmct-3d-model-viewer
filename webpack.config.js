@@ -4,8 +4,8 @@ var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     entry: './src/Openmct3dModelViewerPlugin',
     output: {
-        path: path.resolve(__dirname, "dist"),
         filename: "openmct-3d-model-viewer.js",
+        path: path.resolve(__dirname, "dist"),
         library: "Openmct3dModelViewerPlugin",
         libraryTarget: "umd"
     },
