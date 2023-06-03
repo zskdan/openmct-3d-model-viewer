@@ -4,7 +4,7 @@
   "description": "3D Model Viewer for Open MCT",
   "author": "Xnaff",
   "license": "Apache-2.0",
-  "main": "index.js",
+  "main": "openmct-3d-model-viewer.js",
   "homepage": "https://github.com/Xnaff/openmct-3d-model-viewer#readme",
   "scripts": {
     "clean": "rm -rf ./dist ./node_modules ./package-lock.json",
